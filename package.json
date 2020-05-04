@@ -26,7 +26,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server-dev": "env-cmd -f ./env/dev.env nodemon index.js",
-    "server-test": "env-cmd -f ./env/test.env jest --runInBand --detectOpenHandles"
+    "server-test": "env-cmd -f ./env/test.env jest --watch --runInBand --detectOpenHandles"
   },
   "jest": {
     "bail": 1,

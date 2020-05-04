@@ -10,5 +10,6 @@ router.post('/login', userCtrl.loginUser);
 //! Private Route
 router.get('/me', authJWT, userCtrl.userProfile);
 router.delete('/me', authJWT, userCtrl.deleteUser);
+router.put('/me', authJWT, userCtrl.updateUser);
 
 module.exports = router;

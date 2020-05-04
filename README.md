@@ -12,6 +12,7 @@
   * [Server Configuration](#server)
     * [Server - app.js](#app)
     * [Server - index.js](#index)
+  * [User's API Test Cases - Jest](#tests)
   * [package.json](#package)
 
 <h1 id='node'>Node.js Base</h1>
@@ -56,12 +57,24 @@
         ├── models
         │   └── user.js
         ├── node_modules
+        ├── public
+        │   ├── favicon.ico
+        │   ├── index.html
+        │   ├── manifest.json
+        │   └── robots.txt
         ├── routes
         │   └── users.js
+        ├── src
+        │   ├── css
+        │   │   ├── index.css
+        │   │   └── index.scss
+        │   ├── App.js
+        │   ├── index.js
+        │   ├── serviceWorker.js
         ├── tests
         │   ├── fixtures
         │   │   └── database.js
-        │   └── user.test.js
+        │   └── user.tests.js
         ├── app.js
         ├── index.js
         ├── package-lock.json
@@ -108,7 +121,7 @@
                     !isEmail(req.body.email) ||
                     req.body.password.length < 7
                 )
-                    return res.status(400).send({ message: 'Invalid credentials' });
+                    return res.status(400).json({ message: 'Invalid credentials' });
                 const user = new User(req.body);
                 await user.save();
                 const token = await createJWT(user);
@@ -125,6 +138,25 @@
                 res.json(user);
             } catch (error) {
                 res.status(500).json({ message: 'Something went wrong', error });
+            }
+        };
+
+        const updateUser = async (req, res) => {
+            const bodyFields = Object.keys(req.body);
+            const allowedFields = ['firstName', 'lastName', 'email', 'password'];
+            const isValidOperation = bodyFields.every((field) => allowedFields.includes(field));
+
+            if (!isValidOperation) return res.status(400).json({ message: 'Invalid Updates!' });
+            try {
+                //! the findIdAndUpdate method bypasses moongose
+                //! It performs a direct operation on the database
+                //+ this means that our middleware won't be executed
+                const user = await User.findOne({ _id: req.user._id });
+                if (!user) return res.status(404).json({ message: 'User not found' });
+                bodyFields.forEach((field) => (user[field] = req.body[field]));
+                res.send(await user.save());
+            } catch (error) {
+                res.status(500).send({ message: 'Something went wrong', error });
             }
         };
 
@@ -145,7 +177,7 @@
         const userProfile = async (req, res) => {
             try {
                 const user = await User.findOne({ _id: req.user._id });
-                if (!user) return res.status(404).json();
+                if (!user) return res.status(404).json({ message: 'User not found' });
                 res.json(user);
             } catch (error) {
                 res.status(500).json({ message: 'Something went wrong', error });
@@ -155,6 +187,7 @@
         module.exports = {
             signupUser,
             deleteUser,
+            updateUser,
             loginUser,
             userProfile
         };
@@ -316,6 +349,7 @@
         //! Private Route
         router.get('/me', authJWT, userCtrl.userProfile);
         router.delete('/me', authJWT, userCtrl.deleteUser);
+        router.put('/me', authJWT, userCtrl.updateUser);
 
         module.exports = router;
     ```
@@ -365,6 +399,177 @@
         console.log(`Server is running on port ${port}`);
     });
 ```
+
+<h2 id='tests'>User's API Test Cases - Jest</h2>
+
+[Go Back to Summary](#summary)
+
+* in `tests/fixtures/database.js`
+  * Database access, delete users, create 4 users
+
+    ```JavaScript
+        const jwt = require('jsonwebtoken');
+        const mongoose = require('mongoose');
+        const User = require('../../models/user');
+
+        class NewUser {
+            constructor(firstName, lastName, email, password) {
+                this._id = mongoose.Types.ObjectId();
+                this.firstName = firstName;
+                this.lastName = lastName;
+                this.email = email;
+                this.password = password;
+                this.token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET_KEY);
+            }
+        }
+
+        const userOne = new NewUser('Roger', 'T', 'roger@gmail.com', 'bananinha');
+        const userTwo = new NewUser('Thaisa', 'S', 'thaisa@gmail.com', 'bananinha');
+        const userThree = new NewUser('Yumi', 'S', 'yumi@gmail.com', 'bananinha');
+        const userFour = new NewUser('Mike', 'T', 'mike@gmail.com', 'bananinha');
+
+        const setupDatabase = async () => {
+            await User.deleteMany();
+            await new User(userOne).save();
+            await new User(userTwo).save();
+            await new User(userThree).save();
+            await new User(userFour).save();
+        };
+
+        module.exports = {
+            userOne,
+            userTwo,
+            userThree,
+            userFour,
+            setupDatabase
+        };
+    ```
+
+* in `tests/user.test.js`
+  * User's test cases
+
+    ```JavaScript
+        const app = require('../app');
+        const User = require('../models/user');
+        const request = require('supertest');
+        const { userOne, userTwo, userThree, userFour, setupDatabase } = require('./fixtures/database');
+        const URL = '/api/users';
+
+        beforeEach(setupDatabase);
+
+        test('Should signup new user', async () => {
+            const newUser = {
+                firstName: 'Joy',
+                lastName: 'A',
+                email: 'joy@gmail.com',
+                password: 'bananinha'
+            };
+            const response = await request(app).post(`${URL}/signup`).send(newUser).expect(201);
+            const user = await User.findById(response.body.user._id);
+            expect(user).not.toBeNull();
+            expect(response.body).toMatchObject({
+                user: {
+                    firstName: 'Joy',
+                    lastName: 'A'
+                }
+            });
+        });
+
+        test('Should login existing user', async () => {
+            const response = await request(app)
+                .post(`${URL}/login`)
+                .send({ email: userOne.email, password: userOne.password })
+                .expect(200);
+            expect(response.body).toMatchObject({
+                user: {
+                    firstName: userOne.firstName,
+                    lastName: userOne.lastName
+                }
+            });
+        });
+
+        test('Should not login user, bad credentials', async () => {
+            await request(app)
+                .post(`${URL}/login`)
+                .send({
+                    email: userTwo.email,
+                    password: userTwo.password + 'bad password'
+                })
+                .expect(400);
+        });
+
+        test('Should get user profile authenticated user', async () => {
+            const response = await request(app)
+                .get(`${URL}/me`)
+                .set('Authorization', `Bearer ${userThree.token}`)
+                .expect(200);
+            expect(response.body).toMatchObject({
+                firstName: userThree.firstName,
+                lastName: userThree.lastName
+            });
+        });
+
+        test('Should not get user profile unauthenticated user', async () => {
+            await request(app).get(`${URL}/me`).expect(401);
+        });
+
+        test('Should delete authenticated user', async () => {
+            const response = await request(app)
+                .delete(`${URL}/me`)
+                .set('Authorization', `Bearer ${userThree.token}`)
+                .expect(200);
+            const user = await User.findById(response.body._id);
+            expect(user).toBeNull();
+        });
+
+        test('Should not delete unauthenticated user', async () => {
+            await request(app).delete(`${URL}/me`).expect(401);
+        });
+
+        test('Should update profile authenticated user', async () => {
+            const response = await request(app)
+                .put(`${URL}/me`)
+                .set('Authorization', `Bearer ${userFour.token}`)
+                .send({
+                    firstName: 'Mike',
+                    lastName: 'Cabecinha'
+                })
+                .expect(200);
+            const user = await User.findById(response.body._id);
+            expect(user).not.toBeNull();
+            expect(user).toMatchObject({
+                firstName: 'Mike',
+                lastName: 'Cabecinha'
+            });
+        });
+
+        test('Should not update profile unauthenticated user', async () => {
+            await request(app)
+                .put(`${URL}/me`)
+                .send({
+                    firstName: 'Mike',
+                    lastName: 'Cabecinha'
+                })
+                .expect(401);
+        });
+
+        test('Should not update profile authenticated user, invalid fields', async () => {
+            await request(app)
+                .put(`${URL}/me`)
+                .set('Authorization', `Bearer ${userFour.token}`)
+                .send({
+                    name: 'Mike',
+                    last: 'Cabecinha'
+                })
+                .expect(400);
+            const user = await User.findById(userFour._id);
+            expect(user).not.toBeNull();
+            expect(user).toMatchObject({
+                firstName: 'Mike',
+                lastName: 'T'
+            });
+        });
+    ```
 
 <h2 id='package'>package.json</h2>
 

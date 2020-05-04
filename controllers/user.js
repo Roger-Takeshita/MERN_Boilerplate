@@ -10,7 +10,7 @@ const signupUser = async (req, res) => {
             !isEmail(req.body.email) ||
             req.body.password.length < 7
         )
-            return res.status(400).send({ message: 'Invalid credentials' });
+            return res.status(400).json({ message: 'Invalid credentials' });
         const user = new User(req.body);
         await user.save();
         const token = await createJWT(user);
@@ -27,6 +27,25 @@ const deleteUser = async (req, res) => {
         res.json(user);
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong', error });
+    }
+};
+
+const updateUser = async (req, res) => {
+    const bodyFields = Object.keys(req.body);
+    const allowedFields = ['firstName', 'lastName', 'email', 'password'];
+    const isValidOperation = bodyFields.every((field) => allowedFields.includes(field));
+
+    if (!isValidOperation) return res.status(400).json({ message: 'Invalid Updates!' });
+    try {
+        //! the findIdAndUpdate method bypasses moongose
+        //! It performs a direct operation on the database
+        //+ this means that our middleware won't be executed
+        const user = await User.findOne({ _id: req.user._id });
+        if (!user) return res.status(404).json({ message: 'User not found' });
+        bodyFields.forEach((field) => (user[field] = req.body[field]));
+        res.send(await user.save());
+    } catch (error) {
+        res.status(500).send({ message: 'Something went wrong', error });
     }
 };
 
@@ -47,7 +66,7 @@ const loginUser = async (req, res) => {
 const userProfile = async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.user._id });
-        if (!user) return res.status(404).json();
+        if (!user) return res.status(404).json({ message: 'User not found' });
         res.json(user);
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong', error });
@@ -57,6 +76,7 @@ const userProfile = async (req, res) => {
 module.exports = {
     signupUser,
     deleteUser,
+    updateUser,
     loginUser,
     userProfile
 };
