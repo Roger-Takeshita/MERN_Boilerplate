@@ -15,7 +15,7 @@ const authJWT = async (req, res, next) => {
 };
 
 const createJWT = (user) =>
-    jwt.sign({ user: { _id: user._id, firstName: user.firstName, lastName: user.lastName } }, SECRET, {
+    jwt.sign({ _id: user._id, firstName: user.firstName, lastName: user.lastName }, SECRET, {
         expiresIn: '1 day'
     });
 

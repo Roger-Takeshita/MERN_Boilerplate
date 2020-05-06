@@ -9,8 +9,8 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import SignupPage from './pages/SignupPage/SignupPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 
-function App({ history, username }) {
-    let pages = username ? (
+function App({ history, firstName }) {
+    let pages = firstName ? (
         <Switch>
             <Route exact path="/profile" render={({ history }) => <ProfilePage history={history} />} />
             <Route exact path="/" render={({ history }) => <HomePage history={history} />} />
@@ -35,7 +35,7 @@ function App({ history, username }) {
 }
 
 const mapStateToProps = (state) => ({
-    username: state.user ? state.user.firstName : undefined
+    firstName: state.user ? state.user.firstName : undefined
 });
 
 export default connect(mapStateToProps)(App);

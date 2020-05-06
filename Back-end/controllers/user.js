@@ -39,7 +39,7 @@ const updateUser = async (req, res) => {
 
     if (!isValidOperation) return res.status(400).json({ message: 'Invalid Updates!' });
     try {
-        //! the findIdAndUpdate method bypasses moongose
+        //! the findIdAndUpdate method bypasses mongoose
         //! It performs a direct operation on the database
         //+ this means that our middleware won't be executed
         const user = await User.findOne({ _id: req.user._id });

@@ -3,19 +3,21 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../redux/user';
 
-function Navbar({ history, username, logoutUser }) {
+function Navbar({ history, firstName, lastName, logoutUser }) {
     const logoutUserFromApp = () => {
         logoutUser();
         history.push('/');
     };
 
-    const navbar = username ? (
+    const navbar = firstName ? (
         <ul>
             <li>
                 <Link to="/">Home</Link>
             </li>
             <li>
-                <Link to="/profile">Profile</Link>
+                <Link to="/profile">
+                    {firstName} {lastName}'s Profile
+                </Link>
             </li>
             <li>
                 <Link to="/logout" onClick={logoutUserFromApp}>
@@ -40,7 +42,8 @@ function Navbar({ history, username, logoutUser }) {
 }
 
 const mapStateToProps = (state) => ({
-    username: state.user ? state.user.firstName : undefined
+    firstName: state.user ? state.user.firstName : undefined,
+    lastName: state.user ? state.user.lastName : undefined
 });
 
 const mapDispatchToProps = (dispatch) => ({
