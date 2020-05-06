@@ -1,0 +1,228 @@
+.my-navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 50px;
+}
+
+.my-navbar ul {
+  display: inherit;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.my-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.form-login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.form-login__form {
+  width: 350px;
+}
+
+.form-login__form__ctrl__input {
+  margin: 5px 0;
+  text-align: right;
+}
+
+.form-login__form__ctrl__input input {
+  width: 190px;
+  height: 30px;
+  font-size: 13px;
+  border-radius: 5px;
+  padding: 0 5px;
+}
+
+.form-login__form__ctrl__input label {
+  margin-right: 10px;
+}
+
+.form-login__form__ctrl__button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: right;
+  padding: 10px 0;
+}
+
+.form-login__form__ctrl__button div:first-child {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.form-login__form__ctrl__button div:first-child button {
+  margin-right: 10px;
+  height: 30px;
+  width: 80px;
+  color: white;
+  background-color: #2469d1;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.form-login__form__ctrl__button div:last-child {
+  text-align: left;
+  width: 200px;
+}
+
+.form-login__form__ctrl__button div:last-child button {
+  height: 30px;
+  width: 80px;
+  color: white;
+  background-color: #fa6868;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.form-login__form__error {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 30px;
+  color: red;
+}
+
+.form-login__table {
+  width: 350px;
+}
+
+.form-login__table__column-one {
+  width: auto;
+  font-weight: bold;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.form-login__table__column-two {
+  width: 200px;
+  font-weight: normal;
+  text-align: left;
+}
+
+.form-signup {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.form-signup__form {
+  width: 350px;
+}
+
+.form-signup__form__ctrl__input {
+  margin: 5px 0;
+  text-align: right;
+}
+
+.form-signup__form__ctrl__input input {
+  width: 190px;
+  height: 30px;
+  font-size: 13px;
+  border-radius: 5px;
+  padding: 0 5px;
+}
+
+.form-signup__form__ctrl__input label {
+  margin-right: 10px;
+}
+
+.form-signup__form__ctrl__button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: right;
+  padding: 10px 0;
+}
+
+.form-signup__form__ctrl__button div:first-child {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.form-signup__form__ctrl__button div:first-child button {
+  margin-right: 10px;
+  height: 30px;
+  width: 80px;
+  color: white;
+  background-color: #2469d1;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.form-signup__form__ctrl__button div:last-child {
+  text-align: left;
+  width: 200px;
+}
+
+.form-signup__form__ctrl__button div:last-child button {
+  height: 30px;
+  width: 80px;
+  color: white;
+  background-color: #fa6868;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.form-signup__form__error {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 30px;
+  color: red;
+}

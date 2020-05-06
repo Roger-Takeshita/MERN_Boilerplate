@@ -11,10 +11,12 @@ const signupUser = async (req, res) => {
             req.body.password.length < 7
         )
             return res.status(400).json({ message: 'Invalid credentials' });
-        const user = new User(req.body);
-        await user.save();
-        const token = await createJWT(user);
-        res.status(201).json({ user, token });
+        const user = await User.findOne({ email: req.body.email });
+        if (user) return res.status(400).json({ message: 'Email already taken' });
+        const newUser = new User(req.body);
+        await newUser.save();
+        const token = await createJWT(newUser);
+        res.status(201).json({ token });
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong', error });
     }
@@ -54,9 +56,10 @@ const loginUser = async (req, res) => {
         const user = await User.findOne({ email: req.body.email });
         if (!user) return res.status(404).json({ message: "User doesn't exist" });
         user.comparePassword(req.body.password, async (error, isMatch) => {
-            if (!isMatch || error) return res.status(400).json({ message: 'Unable to login' });
+            if (!isMatch || error)
+                return res.status(400).json({ message: 'Unable to login, bad credentials' });
             const token = await createJWT(user);
-            res.json({ user, token });
+            res.json({ token });
         });
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong', error });

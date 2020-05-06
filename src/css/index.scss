@@ -1,0 +1,148 @@
+$padding: 10px;
+$margin: 10px;
+$buttonSubmitColor: rgb(36, 105, 209);
+$buttonCancelColor: rgb(250, 104, 104);
+
+@mixin displayFlex ($justifyContent) {
+    display: flex;
+    justify-content: $justifyContent;
+    align-items: center;
+
+}
+
+@mixin buttonStyle ($height, $width, $color, $fontColor, $borderRadius) {
+    height: $height;
+    width: $width;
+    color: $fontColor;
+    background-color: $color;
+    border-radius: $borderRadius;
+    font-weight: bold;
+}
+
+.my-navbar {
+    display: flex;
+    height: 50px;
+    ul {
+        display: inherit;
+        flex-grow: 1;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        align-items: center;
+        justify-content: space-around;
+    }
+}
+
+.my-footer {
+    @include displayFlex(center);
+}
+
+.form-login {
+    @include displayFlex(center);
+    flex-direction: column;
+    &__form {
+        width: 350px;
+        &__ctrl {
+            &__input {
+                margin: $margin/2 0;
+                text-align: right;
+                input {
+                    width: 190px;
+                    height: 30px;
+                    font-size: 13px;
+                    border-radius: 5px;
+                    padding: 0 5px;
+                }
+                label {
+                    margin-right: $margin;
+                }
+            }
+            &__button {
+                display: flex;
+                text-align: right;
+                padding: $padding 0;
+                div:first-child {
+                    flex-grow: 1;
+                    button {
+                        margin-right: $margin;
+                        @include buttonStyle (30px, 80px, $buttonSubmitColor, white, 5px)
+                    }
+                }
+                div:last-child {
+                    text-align: left;
+                    width: 200px;
+                    button {
+                        @include buttonStyle (30px, 80px, $buttonCancelColor, white, 5px);
+                    }
+                }
+            }
+        }
+        &__error {
+            @include displayFlex(center);
+            height: 30px;
+            color: red;
+        }
+    }
+    &__table {
+        width: 350px;
+        &__column-one {
+            width: auto;
+            font-weight: bold;
+            text-align: right;
+            padding-right: $padding;
+        }
+        &__column-two {
+            width: 200px;
+            font-weight: normal;
+            text-align: left;
+        }
+    }
+}
+
+.form-signup {
+    @include displayFlex(center);
+    flex-direction: column;
+    &__form {
+        width: 350px;
+        &__ctrl {
+            &__input {
+                margin: $margin/2 0;
+                text-align: right;
+                input {
+                    width: 190px;
+                    height: 30px;
+                    font-size: 13px;
+                    border-radius: 5px;
+                    padding: 0 5px;
+                }
+                label {
+                    margin-right: $margin;
+                }
+            }
+            &__button {
+                display: flex;
+                text-align: right;
+                padding: $padding 0;
+                div:first-child {
+                    flex-grow: 1;
+                    button {
+                        margin-right: $margin;
+                        @include buttonStyle (30px, 80px, $buttonSubmitColor, white, 5px)
+                    }
+                }
+                div:last-child {
+                    text-align: left;
+                    width: 200px;
+                    button {
+                        @include buttonStyle (30px, 80px, $buttonCancelColor, white, 5px);
+                    }
+                }
+            }
+        }
+        &__error {
+            @include displayFlex(center);
+            height: 30px;
+            color: red;
+        }
+    }
+}

@@ -14,7 +14,10 @@ const authJWT = async (req, res, next) => {
     }
 };
 
-const createJWT = (user) => jwt.sign({ _id: user._id }, SECRET, { expiresIn: '1 day' });
+const createJWT = (user) =>
+    jwt.sign({ user: { _id: user._id, firstName: user.firstName, lastName: user.lastName } }, SECRET, {
+        expiresIn: '1 day'
+    });
 
 module.exports = {
     authJWT,
