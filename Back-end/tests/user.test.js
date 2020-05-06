@@ -1,6 +1,7 @@
 const app = require('../app');
 const User = require('../models/user');
 const request = require('supertest');
+const jwt = require('jsonwebtoken');
 const { userOne, userTwo, userThree, userFour, setupDatabase } = require('./fixtures/database');
 const URL = '/api/users';
 
@@ -14,9 +15,10 @@ test('Should signup new user', async () => {
         password: 'bananinha'
     };
     const response = await request(app).post(`${URL}/signup`).send(newUser).expect(201);
-    const user = await User.findById(response.body.user._id);
+    const data = await jwt.verify(response.body.token, process.env.JWT_SECRET_KEY);
+    const user = await User.findById(data.user._id);
     expect(user).not.toBeNull();
-    expect(response.body).toMatchObject({
+    expect(data).toMatchObject({
         user: {
             firstName: 'Joy',
             lastName: 'A'
@@ -29,7 +31,8 @@ test('Should login existing user', async () => {
         .post(`${URL}/login`)
         .send({ email: userOne.email, password: userOne.password })
         .expect(200);
-    expect(response.body).toMatchObject({
+    const data = await jwt.verify(response.body.token, process.env.JWT_SECRET_KEY);
+    expect(data).toMatchObject({
         user: {
             firstName: userOne.firstName,
             lastName: userOne.lastName

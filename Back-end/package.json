@@ -1,0 +1,30 @@
+{
+  "name": "backend-base",
+  "version": "1.0.0",
+  "description": "Node.js Base Back-end",
+  "main": "index.js",
+  "scripts": {
+    "dev": "env-cmd -f ./env/dev.env nodemon index.js",
+    "test": "env-cmd -f ./env/test.env jest --watch --runInBand --detectOpenHandles"
+  },
+  "jest": {
+    "bail": 1,
+    "verbose": true,
+    "testEnvironment": "node"
+  },
+  "author": "Roger Takeshita",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "env-cmd": "^10.1.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.11",
+    "morgan": "^1.10.0",
+    "validator": "^13.0.0"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1",
+    "supertest": "^4.0.2"
+  }
+}
