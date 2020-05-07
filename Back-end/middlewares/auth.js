@@ -4,13 +4,15 @@ const SECRET = process.env.JWT_SECRET_KEY;
 const authJWT = async (req, res, next) => {
     try {
         let token = req.get('Authorization') || req.query.token || req.body.token;
-        token = token.replace('Bearer ', '');
-        const user = await jwt.verify(token, SECRET);
-        if (!user) return res.status(400).json({ error: 'Not Authorized' });
-        req.user = user;
-        next();
+        if (token) {
+            token = token.replace('Bearer ', '');
+            const user = await jwt.verify(token, SECRET);
+            if (!user) return res.status(400).json({ message: 'Not Authorized' });
+            req.user = user;
+            next();
+        }
     } catch (error) {
-        res.status(401).send({ error: 'Please authenticate first.' });
+        res.status(401).json({ message: 'Please authenticate first.' });
     }
 };
 

@@ -2,7 +2,7 @@ import apiRequestHelper from './apiService';
 import tokenService from './tokenService';
 const URL = '/api/users';
 
-async function loginUser(data = { email: undefined, password: undefined }) {
+function loginUser(data = { email: undefined, password: undefined }) {
     const url = `${URL}/login`;
     return apiRequestHelper('POST', url, false, data).then(({ token }) => {
         tokenService.setToken(token);
@@ -18,7 +18,7 @@ function getUserProfile() {
     return apiRequestHelper('GET', url, true);
 }
 
-async function signupUser(
+function signupUser(
     data = { firstName: undefined, lastName: undefined, email: undefined, password: undefined }
 ) {
     const url = `${URL}/signup`;
@@ -31,7 +31,9 @@ function updateUser(
     data = { firstName: undefined, lastName: undefined, email: undefined, password: undefined }
 ) {
     const url = `${URL}/me`;
-    return apiRequestHelper('GET', url, true, data);
+    return apiRequestHelper('PUT', url, true, data).then(({ token }) => {
+        tokenService.updateToken(token);
+    });
 }
 
 function deleteUser() {

@@ -1,14 +1,14 @@
-const tokenService = require('./tokenService');
+import tokenService from './tokenService';
 
 function apiRequestHelper(type, url, auth = false, data) {
     const option = {
         method: type,
         headers: new Headers({
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + tokenService.getToken()
         })
     };
-    if (auth) option.headers.Authorization = 'Bearer ' + tokenService.getToken();
-    if (type === 'POST' || type === 'PUT') option.body = JSON.stringify(data);
+    if (data && type !== 'GET') option.body = JSON.stringify(data);
     return fetch(url, option).then(async (res) => {
         const response = await res.json();
         if (res.ok) return response;

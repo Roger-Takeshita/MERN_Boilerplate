@@ -2,6 +2,7 @@ import userService from '../utils/userService';
 
 const LOGIN_USER = 'LOGIN_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
+const UPDATE_USER = 'UPDATE_USER';
 const SIGNUP_USER = 'SIGNUP_USER';
 
 export const loginUser = () => ({
@@ -21,6 +22,11 @@ export const signupUser = () => ({
     payload: userService.getUser()
 });
 
+export const updateUser = () => ({
+    type: UPDATE_USER,
+    payload: userService.getUser()
+});
+
 function userReducer(state = userService.getUser(), action) {
     switch (action.type) {
         case LOGIN_USER:
@@ -28,6 +34,8 @@ function userReducer(state = userService.getUser(), action) {
         case LOGOUT_USER:
             return null;
         case SIGNUP_USER:
+            return action.payload;
+        case UPDATE_USER:
             return action.payload;
         default:
             return state;

@@ -45,6 +45,7 @@ function FormLogin({ history, loginUser }) {
                     <div className="form-login__form__ctrl__input">
                         <label>Email</label>
                         <input
+                            required
                             name="email"
                             type="email"
                             autoComplete="username"
@@ -56,10 +57,12 @@ function FormLogin({ history, loginUser }) {
                     <div className="form-login__form__ctrl__input">
                         <label>Password</label>
                         <input
+                            required
                             name="password"
                             type="password"
                             autoComplete="new-password"
                             placeholder="Password"
+                            minLength="7"
                             value={form.password}
                             onChange={handleChange}
                         />

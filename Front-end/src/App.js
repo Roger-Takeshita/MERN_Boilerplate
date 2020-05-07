@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Head from './components/Head/Head';
+import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import HomePage from './pages/HomePage/HomePage';
 import LoginPage from './pages/LoginPage/LoginPage';
@@ -27,7 +27,7 @@ function App({ history, firstName }) {
 
     return (
         <div className="App">
-            <Head history={history} />
+            <Header history={history} />
             <main>{pages}</main>
             <Footer />
         </div>

@@ -33,19 +33,23 @@ const deleteUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-    const bodyFields = Object.keys(req.body);
-    const allowedFields = ['firstName', 'lastName', 'email', 'password'];
-    const isValidOperation = bodyFields.every((field) => allowedFields.includes(field));
-
-    if (!isValidOperation) return res.status(400).json({ message: 'Invalid Updates!' });
     try {
         //! the findIdAndUpdate method bypasses mongoose
         //! It performs a direct operation on the database
         //+ this means that our middleware won't be executed
         const user = await User.findOne({ _id: req.user._id });
         if (!user) return res.status(404).json({ message: 'User not found' });
-        bodyFields.forEach((field) => (user[field] = req.body[field]));
-        res.send(await user.save());
+        user.comparePassword(req.body.password, async (err, isMatch) => {
+            if (isMatch) {
+                user.firstName = req.body.firstName;
+                user.lastName = req.body.lastName;
+                if (req.body.newPassword !== '') user.password = req.body.newPassword;
+                await user.save();
+                const token = createJWT(user);
+                return res.json({ token });
+            }
+            res.status(400).json({ message: 'Wrong password!' });
+        });
     } catch (error) {
         res.status(500).send({ message: 'Something went wrong', error });
     }

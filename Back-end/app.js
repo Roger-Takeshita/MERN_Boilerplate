@@ -10,7 +10,7 @@ app.use(express.json());
 app.use('/api/users', require('./routes/users'));
 
 app.get('/*', (req, res) => {
-    res.send({ error: "Path doesn't exist" });
+    res.status(404).json({ message: "Path doesn't exist" });
 });
 
 module.exports = app;

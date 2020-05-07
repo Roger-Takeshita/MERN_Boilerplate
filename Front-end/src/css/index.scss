@@ -1,7 +1,8 @@
 $padding: 10px;
 $margin: 10px;
-$buttonSubmitColor: rgb(36, 105, 209);
-$buttonCancelColor: rgb(250, 104, 104);
+$borderRadius: 5px;
+$buttonSubmitColor: rgb(25,118,210);
+$buttonCancelColor: rgb(234,69,100);
 
 @mixin displayFlex ($justifyContent) {
     display: flex;
@@ -19,7 +20,29 @@ $buttonCancelColor: rgb(250, 104, 104);
     font-weight: bold;
 }
 
+body {
+    text-align: center;
+    min-width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 100vw;
+
+}
+
+// header {
+
+// }
+
 .my-navbar {
+    background-color: grey;
     display: flex;
     height: 50px;
     ul {
@@ -30,11 +53,24 @@ $buttonCancelColor: rgb(250, 104, 104);
         margin: 0;
         align-items: center;
         justify-content: space-around;
+        li {
+            height: 100%;
+            a {
+                @include displayFlex(center);
+                text-decoration: none;
+                height: 100%;
+                padding: 0 $padding*2;
+                color: white;
+                &:hover {
+                    background-color: rgba(114, 114, 114, 0.836);
+                }
+            }
+        }
     }
 }
 
-.my-footer {
-    @include displayFlex(center);
+main {
+    flex: 1;
 }
 
 .form-login {
@@ -146,3 +182,79 @@ $buttonCancelColor: rgb(250, 104, 104);
         }
     }
 }
+
+.form-profile {
+    @include displayFlex(center);
+    flex-direction: column;
+    &__form {
+        width: 350px;
+        &__ctrl {
+            &__input {
+                margin: $margin/2 0;
+                text-align: right;
+                input {
+                    width: 190px;
+                    height: 30px;
+                    font-size: 13px;
+                    border-radius: 5px;
+                    padding: 0 5px;
+                }
+                label {
+                    margin-right: $margin;
+                }
+            }
+            &__buttons {
+                display: flex;
+                text-align: right;
+                padding: $padding 0;
+                &__part1 {
+                    flex-grow: 1;
+                    &__btn-submit {
+                        margin-right: $margin;
+                        @include buttonStyle (30px, 80px, $buttonSubmitColor, white, 5px)
+                    }
+                    &__btn-submit--disabled {
+                        margin-right: $margin;
+                        @include buttonStyle (30px, 80px, lightgray, white, 5px)
+                    }
+                }
+                &__part2 {
+                    text-align: left;
+                    width: 200px;
+                    &__btn-cancel {
+                        @include buttonStyle (30px, 80px, $buttonCancelColor, white, 5px);
+                    }
+                }
+            }
+        }
+        &__error {
+            @include displayFlex(center);
+            height: 30px;
+            color: red;
+        }
+    }
+}
+
+.my-footer {
+    @include displayFlex(center);
+    background-color: lightgrey;
+    padding: $padding 0;
+    &__link {
+        @include displayFlex(center);
+        text-decoration: none;
+        color: black;
+        padding: 0 $padding/5;
+        font-size: 20px;
+        line-height: 20px;
+        font-family: 'Dhurjati', sans-serif;
+        span {
+            font-family: 'Dancing Script', cursive;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        img {
+            width: 20px;
+        }
+    }
+}
+

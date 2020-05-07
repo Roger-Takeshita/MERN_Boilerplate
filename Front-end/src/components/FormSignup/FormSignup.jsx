@@ -48,6 +48,7 @@ function FormSignup({ history, signupUser }) {
                     <div className="form-signup__form__ctrl__input">
                         <label>First Name</label>
                         <input
+                            required
                             name="firstName"
                             placeholder="First Name"
                             value={form.firstName}
@@ -57,6 +58,7 @@ function FormSignup({ history, signupUser }) {
                     <div className="form-signup__form__ctrl__input">
                         <label>Last Name</label>
                         <input
+                            required
                             name="lastName"
                             placeholder="Last Name"
                             value={form.lastName}
@@ -66,6 +68,7 @@ function FormSignup({ history, signupUser }) {
                     <div className="form-signup__form__ctrl__input">
                         <label>Email</label>
                         <input
+                            required
                             name="email"
                             type="email"
                             placeholder="Email"
@@ -77,10 +80,12 @@ function FormSignup({ history, signupUser }) {
                     <div className="form-signup__form__ctrl__input">
                         <label>Password</label>
                         <input
+                            required
                             name="password"
                             type="password"
                             autoComplete="new-password"
                             placeholder="Password"
+                            minLength="7"
                             value={form.password}
                             onChange={handleChange}
                         />
@@ -88,10 +93,12 @@ function FormSignup({ history, signupUser }) {
                     <div className="form-signup__form__ctrl__input">
                         <label>Confirm Password</label>
                         <input
+                            required
                             name="confirmPassword"
                             type="password"
                             autoComplete="new-password"
                             placeholder="Confirm Password"
+                            minLength="7"
                             value={form.confirmPassword}
                             onChange={handleChange}
                         />

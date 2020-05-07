@@ -15,9 +15,7 @@ function Navbar({ history, firstName, lastName, logoutUser }) {
                 <Link to="/">Home</Link>
             </li>
             <li>
-                <Link to="/profile">
-                    {firstName} {lastName}'s Profile
-                </Link>
+                <Link to="/profile">Profile</Link>
             </li>
             <li>
                 <Link to="/logout" onClick={logoutUserFromApp}>

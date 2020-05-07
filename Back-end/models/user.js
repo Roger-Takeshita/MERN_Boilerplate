@@ -61,7 +61,6 @@ userSchema.methods.comparePassword = function (tryPassword, callback) {
 userSchema.set('toJSON', {
     transform: function (doc, ret) {
         delete ret.password;
-        delete ret.email;
         delete ret.createdAt;
         delete ret.updatedAt;
         delete ret.__v;

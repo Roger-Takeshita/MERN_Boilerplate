@@ -1,4 +1,26 @@
+body {
+  text-align: center;
+  min-width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.App {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
 .my-navbar {
+  background-color: grey;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -20,7 +42,11 @@
       justify-content: space-around;
 }
 
-.my-footer {
+.my-navbar ul li {
+  height: 100%;
+}
+
+.my-navbar ul li a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -30,6 +56,20 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  text-decoration: none;
+  height: 100%;
+  padding: 0 20px;
+  color: white;
+}
+
+.my-navbar ul li a:hover {
+  background-color: rgba(114, 114, 114, 0.836);
+}
+
+main {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 .form-login {
@@ -88,7 +128,7 @@
   height: 30px;
   width: 80px;
   color: white;
-  background-color: #2469d1;
+  background-color: #1976d2;
   border-radius: 5px;
   font-weight: bold;
 }
@@ -102,7 +142,7 @@
   height: 30px;
   width: 80px;
   color: white;
-  background-color: #fa6868;
+  background-color: #ea4564;
   border-radius: 5px;
   font-weight: bold;
 }
@@ -194,7 +234,7 @@
   height: 30px;
   width: 80px;
   color: white;
-  background-color: #2469d1;
+  background-color: #1976d2;
   border-radius: 5px;
   font-weight: bold;
 }
@@ -208,7 +248,7 @@
   height: 30px;
   width: 80px;
   color: white;
-  background-color: #fa6868;
+  background-color: #ea4564;
   border-radius: 5px;
   font-weight: bold;
 }
@@ -225,4 +265,145 @@
           align-items: center;
   height: 30px;
   color: red;
+}
+
+.form-profile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.form-profile__form {
+  width: 350px;
+}
+
+.form-profile__form__ctrl__input {
+  margin: 5px 0;
+  text-align: right;
+}
+
+.form-profile__form__ctrl__input input {
+  width: 190px;
+  height: 30px;
+  font-size: 13px;
+  border-radius: 5px;
+  padding: 0 5px;
+}
+
+.form-profile__form__ctrl__input label {
+  margin-right: 10px;
+}
+
+.form-profile__form__ctrl__buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: right;
+  padding: 10px 0;
+}
+
+.form-profile__form__ctrl__buttons__part1 {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.form-profile__form__ctrl__buttons__part1__btn-submit {
+  margin-right: 10px;
+  height: 30px;
+  width: 80px;
+  color: white;
+  background-color: #1976d2;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.form-profile__form__ctrl__buttons__part1__btn-submit--disabled {
+  margin-right: 10px;
+  height: 30px;
+  width: 80px;
+  color: white;
+  background-color: lightgray;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.form-profile__form__ctrl__buttons__part2 {
+  text-align: left;
+  width: 200px;
+}
+
+.form-profile__form__ctrl__buttons__part2__btn-cancel {
+  height: 30px;
+  width: 80px;
+  color: white;
+  background-color: #ea4564;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.form-profile__form__error {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 30px;
+  color: red;
+}
+
+.my-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: lightgrey;
+  padding: 10px 0;
+}
+
+.my-footer__link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-decoration: none;
+  color: black;
+  padding: 0 2px;
+  font-size: 20px;
+  line-height: 20px;
+  font-family: 'Dhurjati', sans-serif;
+}
+
+.my-footer__link span {
+  font-family: 'Dancing Script', cursive;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.my-footer__link img {
+  width: 20px;
 }
