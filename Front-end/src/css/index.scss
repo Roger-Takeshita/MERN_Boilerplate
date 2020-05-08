@@ -1,6 +1,7 @@
 $padding: 10px;
 $margin: 10px;
 $borderRadius: 5px;
+$iconColorHover: rgb(101, 148, 250);
 
 $btnMinHeight: 30px;
 $btnMinWidth: 80px;
@@ -318,8 +319,95 @@ main {
     }
 }
 
-
-
+.about {
+    @include displayFlex(center);
+    flex-direction: column;
+    &__div {
+        margin-top: 3rem;
+    }
+    &__img {
+        width: 180px;
+        border-radius: 50%;
+    }
+    &__name {
+        font-size: 1.9rem;
+        margin-top: 1rem;
+        font-weight: bold;
+    }
+    &__title {
+        font-size: 1.1rem;
+        font-weight: bolder;
+        margin-top: 0.5rem;
+        color: $iconColorHover;
+    }
+    &__technologies {
+        margin-top: 2.5rem;
+        font-weight: lighter;
+        width: 600px;
+        div:first-child {
+            font-size: 1.3rem;
+        }
+    }
+    &__social-media {
+        margin-top: 1.5rem;
+        font-weight: lighter;
+        div:first-child {
+            font-size: 1.3rem;
+        }
+    }
+    &__icons {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 0.5rem;
+    }
+    &__icon > svg {
+        width: 60px;
+        height: 60px;
+        margin: 20px;
+    }
+    &__icon-local {
+        width: 60px;
+        height: 60px;
+    }
+    &__icon-social-media {
+        height: 20px;
+        margin: 10px 15px 20px 15px;
+        transition: transform .25s;
+        filter: grayscale(100%);
+        &:hover {
+            filter: none;
+            transform: scale(2.00);
+        }
+    }
+    &__website {
+        a {
+            text-decoration: none;
+            &:hover {
+                color: $iconColorHover;
+            }
+        }
+    }
+    &__repo {
+        @include displayFlex(center);
+        margin-top: 1.5rem;
+        height: 20px;
+        font-size: 0.9rem;
+        a {
+            display: inherit;
+            align-items: inherit;
+            text-decoration: none;
+            svg {
+                margin-right: 5px;
+            }
+            &:hover {
+                color: $iconColorHover;
+            }
+        }
+    }
+}
+  
 .my-footer {
     @include displayFlex(center);
     background-color: lightgrey;

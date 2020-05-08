@@ -38,6 +38,9 @@ function Navbar({ history, firstName, lastName, logoutUser }) {
                 <Link to="/">Home</Link>
             </li>
             <li>
+                <Link to="/about">About</Link>
+            </li>
+            <li>
                 <Link to="/profile">Profile</Link>
             </li>
             <li>
@@ -55,6 +58,9 @@ function Navbar({ history, firstName, lastName, logoutUser }) {
         <ul>
             <li>
                 <Link to="/">Home</Link>
+            </li>
+            <li>
+                <Link to="/about">About</Link>
             </li>
             <li>
                 <Link to="/login">Log In</Link>
