@@ -42,10 +42,10 @@ function FormSignup({ history, signupUser }) {
     };
 
     return (
-        <div className="form-signup">
-            <form className="form-signup__form" onSubmit={handleSubmit}>
-                <div className="form-signup__form__ctrl">
-                    <div className="form-signup__form__ctrl__input">
+        <div className="form-sign-up">
+            <form className="form-sign-up__form" onSubmit={handleSubmit}>
+                <div className="form-sign-up__form__ctrl">
+                    <div className="form-sign-up__form__ctrl__input">
                         <label>First Name</label>
                         <input
                             required
@@ -55,7 +55,7 @@ function FormSignup({ history, signupUser }) {
                             onChange={handleChange}
                         />
                     </div>
-                    <div className="form-signup__form__ctrl__input">
+                    <div className="form-sign-up__form__ctrl__input">
                         <label>Last Name</label>
                         <input
                             required
@@ -65,7 +65,7 @@ function FormSignup({ history, signupUser }) {
                             onChange={handleChange}
                         />
                     </div>
-                    <div className="form-signup__form__ctrl__input">
+                    <div className="form-sign-up__form__ctrl__input">
                         <label>Email</label>
                         <input
                             required
@@ -77,7 +77,7 @@ function FormSignup({ history, signupUser }) {
                             onChange={handleChange}
                         />
                     </div>
-                    <div className="form-signup__form__ctrl__input">
+                    <div className="form-sign-up__form__ctrl__input">
                         <label>Password</label>
                         <input
                             required
@@ -90,7 +90,7 @@ function FormSignup({ history, signupUser }) {
                             onChange={handleChange}
                         />
                     </div>
-                    <div className="form-signup__form__ctrl__input">
+                    <div className="form-sign-up__form__ctrl__input">
                         <label>Confirm Password</label>
                         <input
                             required
@@ -103,20 +103,24 @@ function FormSignup({ history, signupUser }) {
                             onChange={handleChange}
                         />
                     </div>
-                    <div className="form-signup__form__ctrl__button">
-                        <div>
+                    <div className="form-sign-up__form__ctrl__buttons">
+                        <div className="form-sign-up__form__ctrl__buttons__part1">
                             <button
                                 type="submit"
-                                className="form-login__form__ctrl__button__submit"
+                                className={
+                                    isFormValid()
+                                        ? 'form-sign-up__form__ctrl__buttons__part1__btn-submit--disabled'
+                                        : 'form-sign-up__form__ctrl__buttons__part1__btn-submit'
+                                }
                                 disabled={isFormValid()}
                             >
                                 Sign Up
                             </button>
                         </div>
-                        <div>
+                        <div className="form-sign-up__form__ctrl__buttons__part2">
                             <button
                                 type="button"
-                                className="form-signup__form__ctrl__button__cancel"
+                                className="form-sign-up__form__ctrl__buttons__part2__btn-cancel"
                                 onClick={() => history.push('/login')}
                             >
                                 Cancel
@@ -124,7 +128,7 @@ function FormSignup({ history, signupUser }) {
                         </div>
                     </div>
                 </div>
-                <div className="form-signup__form__error">
+                <div className="form-sign-up__form__error">
                     {form.message !== '' ? (
                         <ErrorMessage message={form.message} doneErrorMessage={doneErrorMessage} />
                     ) : (

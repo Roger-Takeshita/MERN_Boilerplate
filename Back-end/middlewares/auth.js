@@ -9,10 +9,11 @@ const authJWT = async (req, res, next) => {
             const user = await jwt.verify(token, SECRET);
             if (!user) return res.status(400).json({ message: 'Not Authorized' });
             req.user = user;
-            next();
+            return next();
         }
-    } catch (error) {
         res.status(401).json({ message: 'Please authenticate first.' });
+    } catch (error) {
+        res.status(500).json({ message: 'Something went wrong.' });
     }
 };
 

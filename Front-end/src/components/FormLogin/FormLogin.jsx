@@ -67,20 +67,24 @@ function FormLogin({ history, loginUser }) {
                             onChange={handleChange}
                         />
                     </div>
-                    <div className="form-login__form__ctrl__button">
-                        <div>
+                    <div className="form-login__form__ctrl__buttons">
+                        <div className="form-login__form__ctrl__buttons__part1">
                             <button
-                                className="form-login__form__ctrl__button__submit"
+                                className={
+                                    isFormValid()
+                                        ? 'form-login__form__ctrl__buttons__part1__btn-submit--disabled'
+                                        : 'form-login__form__ctrl__buttons__part1__btn-submit'
+                                }
                                 type="submit"
                                 disabled={isFormValid()}
                             >
                                 Log In
                             </button>
                         </div>
-                        <div>
+                        <div className="form-login__form__ctrl__buttons__part2">
                             <button
                                 type="button"
-                                className="form-login__form__ctrl__button__cancel"
+                                className="form-login__form__ctrl__buttons__part2__btn-cancel"
                                 onClick={() => history.push('/signup')}
                             >
                                 Cancel

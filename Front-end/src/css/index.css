@@ -109,7 +109,7 @@ main {
   margin-right: 10px;
 }
 
-.form-login__form__ctrl__button {
+.form-login__form__ctrl__buttons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -117,34 +117,53 @@ main {
   padding: 10px 0;
 }
 
-.form-login__form__ctrl__button div:first-child {
+.form-login__form__ctrl__buttons__part1 {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
 }
 
-.form-login__form__ctrl__button div:first-child button {
+.form-login__form__ctrl__buttons__part1__btn-submit {
   margin-right: 10px;
-  height: 30px;
-  width: 80px;
+  min-height: 30px;
+  min-width: 80px;
   color: white;
   background-color: #1976d2;
   border-radius: 5px;
   font-weight: bold;
+  text-transform: uppercase;
+  outline: none;
+  cursor: pointer;
 }
 
-.form-login__form__ctrl__button div:last-child {
+.form-login__form__ctrl__buttons__part1__btn-submit--disabled {
+  margin-right: 10px;
+  min-height: 30px;
+  min-width: 80px;
+  color: white;
+  background-color: lightgrey;
+  border-radius: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  outline: none;
+  cursor: not-allowed;
+}
+
+.form-login__form__ctrl__buttons__part2 {
   text-align: left;
   width: 200px;
 }
 
-.form-login__form__ctrl__button div:last-child button {
-  height: 30px;
-  width: 80px;
+.form-login__form__ctrl__buttons__part2__btn-cancel {
+  min-height: 30px;
+  min-width: 80px;
   color: white;
   background-color: #ea4564;
   border-radius: 5px;
   font-weight: bold;
+  text-transform: uppercase;
+  outline: none;
+  cursor: pointer;
 }
 
 .form-login__form__error {
@@ -178,7 +197,7 @@ main {
   text-align: left;
 }
 
-.form-signup {
+.form-sign-up {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -194,16 +213,16 @@ main {
           flex-direction: column;
 }
 
-.form-signup__form {
+.form-sign-up__form {
   width: 350px;
 }
 
-.form-signup__form__ctrl__input {
+.form-sign-up__form__ctrl__input {
   margin: 5px 0;
   text-align: right;
 }
 
-.form-signup__form__ctrl__input input {
+.form-sign-up__form__ctrl__input input {
   width: 190px;
   height: 30px;
   font-size: 13px;
@@ -211,11 +230,11 @@ main {
   padding: 0 5px;
 }
 
-.form-signup__form__ctrl__input label {
+.form-sign-up__form__ctrl__input label {
   margin-right: 10px;
 }
 
-.form-signup__form__ctrl__button {
+.form-sign-up__form__ctrl__buttons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -223,37 +242,56 @@ main {
   padding: 10px 0;
 }
 
-.form-signup__form__ctrl__button div:first-child {
+.form-sign-up__form__ctrl__buttons__part1 {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
 }
 
-.form-signup__form__ctrl__button div:first-child button {
+.form-sign-up__form__ctrl__buttons__part1__btn-submit {
   margin-right: 10px;
-  height: 30px;
-  width: 80px;
+  min-height: 30px;
+  min-width: 80px;
   color: white;
   background-color: #1976d2;
   border-radius: 5px;
   font-weight: bold;
+  text-transform: uppercase;
+  outline: none;
+  cursor: pointer;
 }
 
-.form-signup__form__ctrl__button div:last-child {
+.form-sign-up__form__ctrl__buttons__part1__btn-submit--disabled {
+  margin-right: 10px;
+  min-height: 30px;
+  min-width: 80px;
+  color: white;
+  background-color: lightgrey;
+  border-radius: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  outline: none;
+  cursor: not-allowed;
+}
+
+.form-sign-up__form__ctrl__buttons__part2 {
   text-align: left;
   width: 200px;
 }
 
-.form-signup__form__ctrl__button div:last-child button {
-  height: 30px;
-  width: 80px;
+.form-sign-up__form__ctrl__buttons__part2__btn-cancel {
+  min-height: 30px;
+  min-width: 80px;
   color: white;
   background-color: #ea4564;
   border-radius: 5px;
   font-weight: bold;
+  text-transform: uppercase;
+  outline: none;
+  cursor: pointer;
 }
 
-.form-signup__form__error {
+.form-sign-up__form__error {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -285,6 +323,14 @@ main {
 
 .form-profile__form {
   width: 350px;
+}
+
+.form-profile__form__ctrl div:nth-child(4) {
+  margin-top: 30px;
+}
+
+.form-profile__form__ctrl div:nth-child(6) {
+  margin-top: 30px;
 }
 
 .form-profile__form__ctrl__input {
@@ -320,22 +366,28 @@ main {
 
 .form-profile__form__ctrl__buttons__part1__btn-submit {
   margin-right: 10px;
-  height: 30px;
-  width: 80px;
+  min-height: 30px;
+  min-width: 80px;
   color: white;
   background-color: #1976d2;
   border-radius: 5px;
   font-weight: bold;
+  text-transform: uppercase;
+  outline: none;
+  cursor: pointer;
 }
 
 .form-profile__form__ctrl__buttons__part1__btn-submit--disabled {
   margin-right: 10px;
-  height: 30px;
-  width: 80px;
+  min-height: 30px;
+  min-width: 80px;
   color: white;
-  background-color: lightgray;
+  background-color: lightgrey;
   border-radius: 5px;
   font-weight: bold;
+  text-transform: uppercase;
+  outline: none;
+  cursor: not-allowed;
 }
 
 .form-profile__form__ctrl__buttons__part2 {
@@ -344,12 +396,15 @@ main {
 }
 
 .form-profile__form__ctrl__buttons__part2__btn-cancel {
-  height: 30px;
-  width: 80px;
+  min-height: 30px;
+  min-width: 80px;
   color: white;
   background-color: #ea4564;
   border-radius: 5px;
   font-weight: bold;
+  text-transform: uppercase;
+  outline: none;
+  cursor: pointer;
 }
 
 .form-profile__form__error {
@@ -364,6 +419,105 @@ main {
           align-items: center;
   height: 30px;
   color: red;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal--hide {
+  display: none;
+}
+
+.modal__main {
+  position: fixed;
+  background-color: white;
+  width: 50%;
+  height: auto;
+  min-width: 400px;
+  min-height: 150px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
+.modal__main__title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: black;
+  font-weight: bold;
+  height: 30px;
+  font-size: 25px;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.modal__main__body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 1px solid lightgrey;
+}
+
+.modal__main__body__msg {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  font-weight: 100;
+  width: 90vw;
+  min-height: 30px;
+  padding: 20px;
+  margin: 10px;
+}
+
+.modal__main__footer__ctrl {
+  padding: 10px;
+  text-align: right;
+}
+
+.modal__main__footer__ctrl__btn-confirm {
+  min-height: 30px;
+  min-width: 80px;
+  color: white;
+  background-color: #1976d2;
+  border-radius: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  outline: none;
+  cursor: pointer;
+}
+
+.modal__main__footer__ctrl__btn-cancel {
+  margin-left: 10px;
+  min-height: 30px;
+  min-width: 80px;
+  color: white;
+  background-color: #ea4564;
+  border-radius: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  outline: none;
+  cursor: pointer;
 }
 
 .my-footer {

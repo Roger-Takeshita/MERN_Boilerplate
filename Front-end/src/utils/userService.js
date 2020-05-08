@@ -38,7 +38,7 @@ function updateUser(
 
 function deleteUser() {
     const url = `${URL}/me`;
-    return apiRequestHelper('GET', url, true);
+    return apiRequestHelper('DELETE', url, true);
 }
 
 function logoutUser() {

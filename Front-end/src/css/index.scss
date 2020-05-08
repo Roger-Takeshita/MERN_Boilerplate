@@ -1,23 +1,31 @@
 $padding: 10px;
 $margin: 10px;
 $borderRadius: 5px;
-$buttonSubmitColor: rgb(25,118,210);
-$buttonCancelColor: rgb(234,69,100);
+
+$btnMinHeight: 30px;
+$btnMinWidth: 80px;
+$btnBorderRadius:5px;
+$btnSubmitColor: rgb(25,118,210);
+$btnCancelColor: rgb(234,69,100);
+$btnDisabledColor: lightgrey;
+$btnFontColor: white;
 
 @mixin displayFlex ($justifyContent) {
     display: flex;
     justify-content: $justifyContent;
     align-items: center;
-
 }
 
-@mixin buttonStyle ($height, $width, $color, $fontColor, $borderRadius) {
-    height: $height;
-    width: $width;
+@mixin buttonStyle ($color, $fontColor, $cursor) {
+    min-height: $btnMinHeight;
+    min-width: $btnMinWidth;
     color: $fontColor;
     background-color: $color;
-    border-radius: $borderRadius;
+    border-radius: $btnBorderRadius;
     font-weight: bold;
+    text-transform: uppercase;
+    outline: none;
+    cursor: $cursor;
 }
 
 body {
@@ -93,22 +101,26 @@ main {
                     margin-right: $margin;
                 }
             }
-            &__button {
+            &__buttons {
                 display: flex;
                 text-align: right;
                 padding: $padding 0;
-                div:first-child {
+                &__part1 {
                     flex-grow: 1;
-                    button {
+                    &__btn-submit {
                         margin-right: $margin;
-                        @include buttonStyle (30px, 80px, $buttonSubmitColor, white, 5px)
+                        @include buttonStyle ($btnSubmitColor, $btnFontColor, pointer);
+                    }
+                    &__btn-submit--disabled {
+                        margin-right: $margin;
+                        @include buttonStyle ($btnDisabledColor, $btnFontColor, not-allowed);
                     }
                 }
-                div:last-child {
+                &__part2 {
                     text-align: left;
                     width: 200px;
-                    button {
-                        @include buttonStyle (30px, 80px, $buttonCancelColor, white, 5px);
+                    &__btn-cancel {
+                        @include buttonStyle ($btnCancelColor, $btnFontColor, pointer);
                     }
                 }
             }
@@ -135,55 +147,7 @@ main {
     }
 }
 
-.form-signup {
-    @include displayFlex(center);
-    flex-direction: column;
-    &__form {
-        width: 350px;
-        &__ctrl {
-            &__input {
-                margin: $margin/2 0;
-                text-align: right;
-                input {
-                    width: 190px;
-                    height: 30px;
-                    font-size: 13px;
-                    border-radius: 5px;
-                    padding: 0 5px;
-                }
-                label {
-                    margin-right: $margin;
-                }
-            }
-            &__button {
-                display: flex;
-                text-align: right;
-                padding: $padding 0;
-                div:first-child {
-                    flex-grow: 1;
-                    button {
-                        margin-right: $margin;
-                        @include buttonStyle (30px, 80px, $buttonSubmitColor, white, 5px)
-                    }
-                }
-                div:last-child {
-                    text-align: left;
-                    width: 200px;
-                    button {
-                        @include buttonStyle (30px, 80px, $buttonCancelColor, white, 5px);
-                    }
-                }
-            }
-        }
-        &__error {
-            @include displayFlex(center);
-            height: 30px;
-            color: red;
-        }
-    }
-}
-
-.form-profile {
+.form-sign-up {
     @include displayFlex(center);
     flex-direction: column;
     &__form {
@@ -211,18 +175,18 @@ main {
                     flex-grow: 1;
                     &__btn-submit {
                         margin-right: $margin;
-                        @include buttonStyle (30px, 80px, $buttonSubmitColor, white, 5px)
+                        @include buttonStyle ($btnSubmitColor, $btnFontColor, pointer);
                     }
                     &__btn-submit--disabled {
                         margin-right: $margin;
-                        @include buttonStyle (30px, 80px, lightgray, white, 5px)
+                        @include buttonStyle ($btnDisabledColor, $btnFontColor, not-allowed);
                     }
                 }
                 &__part2 {
                     text-align: left;
                     width: 200px;
                     &__btn-cancel {
-                        @include buttonStyle (30px, 80px, $buttonCancelColor, white, 5px);
+                        @include buttonStyle ($btnCancelColor, $btnFontColor, pointer);
                     }
                 }
             }
@@ -234,6 +198,127 @@ main {
         }
     }
 }
+
+.form-profile {
+    @include displayFlex(center);
+    flex-direction: column;
+    &__form {
+        width: 350px;
+        &__ctrl {
+            div:nth-child(4) {
+                margin-top: $margin*3;
+            }
+            div:nth-child(6) {
+                margin-top: $margin*3;
+            }
+            &__input {
+                margin: $margin/2 0;
+                text-align: right;
+                input {
+                    width: 190px;
+                    height: 30px;
+                    font-size: 13px;
+                    border-radius: 5px;
+                    padding: 0 5px;
+                }
+                label {
+                    margin-right: $margin;
+                }
+            }
+            &__buttons {
+                display: flex;
+                text-align: right;
+                padding: $padding 0;
+                &__part1 {
+                    flex-grow: 1;
+                    &__btn-submit {
+                        margin-right: $margin;
+                        @include buttonStyle ($btnSubmitColor, $btnFontColor, pointer);
+                    }
+                    &__btn-submit--disabled {
+                        margin-right: $margin;
+                        @include buttonStyle ($btnDisabledColor, $btnFontColor, not-allowed);
+                    }
+                }
+                &__part2 {
+                    text-align: left;
+                    width: 200px;
+                    &__btn-cancel {
+                        @include buttonStyle ($btnCancelColor, $btnFontColor, pointer);
+                    }
+                }
+            }
+        }
+        &__error {
+            @include displayFlex(center);
+            height: 30px;
+            color: red;
+        }
+    }
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    &--hide {
+        display: none;
+    }
+    &__main {
+        position:fixed;
+        background-color: white;
+        width: 50%;
+        height: auto;
+        min-width: 400px;
+        min-height: 150px;
+        top:50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        border: 1px solid grey;
+        border-radius: $borderRadius;
+        &__title {
+            @include displayFlex(center);
+            color: black;
+            font-weight: bold;
+            height: 30px;
+            font-size: 25px;
+            text-transform: uppercase;
+            margin-top: $margin;
+        }
+        &__body {
+            
+            @include displayFlex(center);
+            border-bottom: 1px solid lightgrey;
+            &__msg {
+                border: 1px solid lightgrey;
+                border-radius: $borderRadius;
+                font-weight: 100;
+                width: 90vw;
+                min-height: 30px;
+                padding: $padding*2;
+                margin: $margin;
+            }
+        }
+        &__footer {
+            &__ctrl {
+                padding: $padding;
+                text-align: right;
+                &__btn-confirm {
+                    @include buttonStyle ($btnSubmitColor, $btnFontColor, pointer);
+                }
+                &__btn-cancel {
+                    margin-left: $margin;
+                    @include buttonStyle ($btnCancelColor, $btnFontColor, pointer);
+                }
+            }
+        }
+    }
+}
+
+
 
 .my-footer {
     @include displayFlex(center);

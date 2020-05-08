@@ -16,13 +16,11 @@ test('Should signup new user', async () => {
     };
     const response = await request(app).post(`${URL}/signup`).send(newUser).expect(201);
     const data = await jwt.verify(response.body.token, process.env.JWT_SECRET_KEY);
-    const user = await User.findById(data.user._id);
+    const user = await User.findById(data._id);
     expect(user).not.toBeNull();
     expect(data).toMatchObject({
-        user: {
-            firstName: 'Joy',
-            lastName: 'A'
-        }
+        firstName: 'Joy',
+        lastName: 'A'
     });
 });
 
@@ -33,10 +31,8 @@ test('Should login existing user', async () => {
         .expect(200);
     const data = await jwt.verify(response.body.token, process.env.JWT_SECRET_KEY);
     expect(data).toMatchObject({
-        user: {
-            firstName: userOne.firstName,
-            lastName: userOne.lastName
-        }
+        firstName: userOne.firstName,
+        lastName: userOne.lastName
     });
 });
 
@@ -84,10 +80,14 @@ test('Should update profile authenticated user', async () => {
         .set('Authorization', `Bearer ${userFour.token}`)
         .send({
             firstName: 'Mike',
-            lastName: 'Cabecinha'
+            lastName: 'Cabecinha',
+            newPassword: '',
+            confirmNewPassword: '',
+            password: 'bananinha'
         })
         .expect(200);
-    const user = await User.findById(response.body._id);
+    const data = await jwt.verify(response.body.token, process.env.JWT_SECRET_KEY);
+    const user = await User.findById(data._id);
     expect(user).not.toBeNull();
     expect(user).toMatchObject({
         firstName: 'Mike',
